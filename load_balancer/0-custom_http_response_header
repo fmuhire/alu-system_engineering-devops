@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Configures Nginx to return a custom HTTP response header with the server hostname
+
+apt-get update
+apt-get install -y nginx
+
+cat > /etc/nginx/conf.d/served_by.conf <<'EOF'
+add_header X-Served-By $hostname;
+EOF
+
+nginx -t
+service nginx restart
